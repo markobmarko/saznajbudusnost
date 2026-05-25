@@ -1,6 +1,6 @@
 import random
+import requests
 from flask import Flask, render_template, request
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -15,16 +15,20 @@ PREDVIĐANJA = [
 def index():
     rezultat = None
     if request.method == 'POST':
-        # Uzimamo podatke iz forme
-        ime = request.form.get('ime')
-        prezime = request.form.get('prezime')
-        datum = request.form.get('datum')
-        mesto = request.form.get('mesto')
+        # Prikupljanje podataka iz forme
+        data = {
+            "Ime": request.form.get('ime'),
+            "Prezime": request.form.get('prezime'),
+            "Datum": request.form.get('datum'),
+            "Mesto": request.form.get('mesto')
+        }
         
-        # Upis u fajl (tvoja baza podataka)
-        with open("baza_korisnika.txt", "a", encoding="utf-8") as f:
-            vreme = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            f.write(f"{vreme} | {ime} | {prezime} | {datum} | {mesto}\n")
+        # Slanje podataka u tvoju Google Tabelu
+        api_url = "https://sheetdb.io/api/v1/3jl2x60m2hsgh" 
+        try:
+            requests.post(api_url, json={"data": [data]})
+        except Exception as e:
+            print(f"Greška pri slanju: {e}")
             
         rezultat = random.choice(PREDVIĐANJA)
         
