@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tvoja Budućnost AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #0f0c29; color: white; font-family: sans-serif; }
+        .box { max-width: 400px; margin: 50px auto; background: #24243e; padding: 25px; border-radius: 20px; }
+    </style>
+</head>
+<body>
+<div class="box shadow">
+    <h3 class="text-center">🔮 Predviđanje sudbine</h3>
+    <form method="POST">
+        <input type="text" name="ime" class="form-control mb-2" placeholder="Ime" required>
+        <input type="text" name="prezime" class="form-control mb-2" placeholder="Prezime" required>
+        <input type="date" name="datum" class="form-control mb-2" required>
+        <input type="text" name="mesto" class="form-control mb-3" placeholder="Mesto rođenja" required>
+        <button type="submit" class="btn btn-primary w-100">OTKRIJ BUDUĆNOST</button>
+    </form>
+    
+    {% if rezultat %}
+    <div class="alert alert-success mt-3">{{ rezultat }}</div>
+    {% endif %}
+</div>
+</body>
+</html>
